@@ -1,0 +1,33 @@
+
+R version 3.5.3 (2019-03-11) -- "Great Truth"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R ist freie Software und kommt OHNE JEGLICHE GARANTIE.
+Sie sind eingeladen, es unter bestimmten Bedingungen weiter zu verbreiten.
+Tippen Sie 'license()' or 'licence()' für Details dazu.
+
+R ist ein Gemeinschaftsprojekt mit vielen Beitragenden.
+Tippen Sie 'contributors()' für mehr Information und 'citation()',
+um zu erfahren, wie R oder R packages in Publikationen zitiert werden können.
+
+Tippen Sie 'demo()' für einige Demos, 'help()' für on-line Hilfe, oder
+'help.start()' für eine HTML Browserschnittstelle zur Hilfe.
+Tippen Sie 'q()', um R zu verlassen.
+
+> # ER model
+> 
+> generateER = function(n = 100, p = 0.5){
++  map = diag(rep(1, n))
++  link = rbinom(n*(n-1)/2, 1,p)
++  t = 1
++  for(j in 2:n){
++  for(i in 1:(j-1)){
++  map[i,j] = link[t]
++  t = t + 1
++  }
++  }
++  return(map)
++ }
+> image(generateER(500))
+> 

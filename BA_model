@@ -1,0 +1,44 @@
+
+R version 3.5.3 (2019-03-11) -- "Great Truth"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R ist freie Software und kommt OHNE JEGLICHE GARANTIE.
+Sie sind eingeladen, es unter bestimmten Bedingungen weiter zu verbreiten.
+Tippen Sie 'license()' or 'licence()' für Details dazu.
+
+R ist ein Gemeinschaftsprojekt mit vielen Beitragenden.
+Tippen Sie 'contributors()' für mehr Information und 'citation()',
+um zu erfahren, wie R oder R packages in Publikationen zitiert werden können.
+
+Tippen Sie 'demo()' für einige Demos, 'help()' für on-line Hilfe, oder
+'help.start()' für eine HTML Browserschnittstelle zur Hilfe.
+Tippen Sie 'q()', um R zu verlassen.
+
+> # BA model
+> 
+> generateBA = function(n = 100, n0 = 2){
++  mat = matrix(0, nrow= n, ncol = n)
++  for(i in 1:n0){
++  for(j in 1:n0){
++  if(i != j){
++  mat[i,j] = 1
++  mat[j,i] = 1
++  }
++  }
++  }
++  for(i in n0:n){
++  list = c()
++  for(k in 1:(i-1)){
++  list = c(list, sum(mat[,k]))
++  }
++  link = sample(c(1:(i-1)), size = 1, prob = list)
++  mat[link,i] = 1
++  mat[i,link] = 1
++  }
++  return(mat)
++ }
+> 
+> 
+> image(generateBA(500))
+> 
